@@ -1,7 +1,7 @@
 FROM java:7-jre
 MAINTAINER John Chambers-Malewig
 
-ENV RDECK_USER rundeck
+ENV RDECK_USER ${RDECK_USER:-rundeck}
 ENV RDECK_BASE ${RDECK_BASE:-/${RDECK_USER}}
 
 RUN adduser --system \
@@ -34,8 +34,8 @@ WORKDIR $RDECK_BASE
 ENV _JAVA_OPTIONS "-XX:MaxPermSize=256m -Xmx1024m"
 
 # Install during build, run when appropriate.
-RUN java -jar ${RDECK_LAUNCHER} --installonly
+RUN java -jar ${RDECK_LAUNCHER} --installonly --basedir ${RDECK_BASE}
 
 EXPOSE 4440 4443
 
-CMD java -jar ${RDECK_LAUNCHER} --skipinstall
+CMD java -jar ${RDECK_LAUNCHER} --skipinstall --basedir ${RDECK_BASE}

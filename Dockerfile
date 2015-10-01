@@ -28,4 +28,4 @@ EXPOSE 4440 4443
 
 ENTRYPOINT ["java"]
 
-CMD ["-XX:MaxPermSize=256m" "-Xmx1024m" "-jar" "rundeck-launcher-2.5.3.jar"]
+CMD ["-XX:MaxPermSize=256m","-Xmx1024m","-jar","rundeck-launcher-2.5.3.jar"]

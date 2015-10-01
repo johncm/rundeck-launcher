@@ -23,9 +23,15 @@ RUN cp /tmp/rundeck-launcher-2.5.3.jar $RDECK_BASE
 #     cd $RDECK_BASE    
 #     java -XX:MaxPermSize=256m -Xmx1024m -jar rundeck-launcher-2.5.3.jar
 WORKDIR $RDECK_BASE
+## ENTRYPOINT ["java"]
+## CMD ["-XX:MaxPermSize=256m","-Xmx1024m","-jar","rundeck-launcher-2.5.3.jar"]
+
+ENV _JAVA_OPTIONS "-XX:MaxPermSize=256m -Xmx1024m"
+
+# Install during build, run when appropriate.
+RUN ["java","-jar","rundeck-launcher-2.5.3.jar","--installonly"]
 
 EXPOSE 4440 4443
 
-ENTRYPOINT ["java"]
-
-CMD ["-XX:MaxPermSize=256m","-Xmx1024m","-jar","rundeck-launcher-2.5.3.jar"]
+ENTRYPOINT ["$RDECK_BASE/server/sbin/rundeckd"]
+CMD ["start"]

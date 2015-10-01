@@ -8,7 +8,7 @@ RUN adduser --system \
       --home ${RDECK_BASE} \
       ${RDECK_USER}
 
-ENV RDECK_LAUNCHER ${RDECK_BASE}/rundeck-launcher.jar
+ENV RDECK_LAUNCHER ${RDECK_BASE}/lib/rundeck-launcher.jar
 
 # From Install Page:
 # Installing with Launcher
@@ -34,8 +34,8 @@ WORKDIR $RDECK_BASE
 ENV _JAVA_OPTIONS "-XX:MaxPermSize=256m -Xmx1024m"
 
 # Install during build, run when appropriate.
-RUN ["java","-jar","${RDECK_LAUNCHER}","--installonly"]
+RUN java -jar ${RDECK_LAUNCHER} --installonly
 
 EXPOSE 4440 4443
 
-CMD ["java","-jar","${RDECK_LAUNCHER}","--skipinstall"]
+CMD java -jar ${RDECK_LAUNCHER} --skipinstall

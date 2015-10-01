@@ -3,4 +3,4 @@ MAINTAINER John Chambers-Malewig
 
 ENTRYPOINT ["java"]
 
-COMMAND ["-version"]
+CMD ["-version"]

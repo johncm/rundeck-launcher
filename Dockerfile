@@ -2,7 +2,7 @@ FROM java:7-jre
 MAINTAINER John Chambers-Malewig
 
 ENV RDECK_USER rundeck
-ENV RDECK_BASE ${RDECK_BASE}:=/${RDECK_USER}
+ENV RDECK_BASE ${RDECK_BASE:-/${RDECK_USER}}
 
 RUN adduser --system \
       --home ${RDECK_BASE} \
